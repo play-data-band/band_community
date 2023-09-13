@@ -1,7 +1,9 @@
 package com.example.community.service;
 
 
+import com.example.community.api.CommunityMemberClient;
 import com.example.community.domain.entity.Community;
+import com.example.community.domain.request.CommunityMemberReqeust;
 import com.example.community.domain.request.CommunityReqeust;
 import com.example.community.domain.response.CommunityResponse;
 import com.example.community.repository.CommunityRepository;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommunityService {
     private final CommunityRepository communityRepository;
+    private final CommunityMemberClient communityMemberClient;
 
     public void save(CommunityReqeust communityReqeust) throws Exception {
         try {
@@ -56,7 +59,13 @@ public class CommunityService {
         community.setLocation(communityReqeust.getLocation());
         community.setProfileImage(communityReqeust.getProfileImage());
         community.setDescription(communityReqeust.getDescription());
-//        communityRepository.save(community);//왜 이거 필요하지? 원래 안필요하지 않나?
+
+        // communityMemberTableUpdate
+        communityMemberClient.updateCommunityInCommunityMember(
+                new CommunityMemberReqeust(null,null,null,null,
+                        communityReqeust.getName(),communityReqeust.getProfileImage()),communityId);
+        //
+
     }
 
 
