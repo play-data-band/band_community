@@ -59,13 +59,12 @@ public class CommunityService {
         community.setLocation(communityReqeust.getLocation());
         community.setProfileImage(communityReqeust.getProfileImage());
         community.setDescription(communityReqeust.getDescription());
-
+        System.out.println(communityReqeust.getName());
         // communityMemberTableUpdate
         communityMemberClient.updateCommunityInCommunityMember(
                 new CommunityMemberReqeust(null,null,null,null,
                         communityReqeust.getName(),communityReqeust.getProfileImage()),communityId);
         //
-
     }
 
 

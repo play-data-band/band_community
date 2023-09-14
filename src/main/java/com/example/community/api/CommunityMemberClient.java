@@ -13,3 +13,5 @@ public interface CommunityMemberClient {
             @RequestBody CommunityMemberReqeust communityMemberReqeust,
             @PathVariable("communityId") Long communityId);
 }
+
+
