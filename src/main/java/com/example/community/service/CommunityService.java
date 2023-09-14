@@ -2,9 +2,11 @@ package com.example.community.service;
 
 
 import com.example.community.api.CommunityMemberClient;
+import com.example.community.api.ReserveClient;
 import com.example.community.domain.entity.Community;
 import com.example.community.domain.request.CommunityMemberReqeust;
 import com.example.community.domain.request.CommunityReqeust;
+import com.example.community.domain.request.ReserveRequest;
 import com.example.community.domain.response.CommunityResponse;
 import com.example.community.repository.CommunityRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import java.util.List;
 public class CommunityService {
     private final CommunityRepository communityRepository;
     private final CommunityMemberClient communityMemberClient;
+    private final ReserveClient reserveClient;
 
     public void save(CommunityReqeust communityReqeust) throws Exception {
         try {
@@ -65,6 +68,9 @@ public class CommunityService {
                 new CommunityMemberReqeust(null,null,null,null,
                         communityReqeust.getName(),communityReqeust.getProfileImage()),communityId);
         //
+        reserveClient.updateById(communityId, new ReserveRequest(
+                communityReqeust.getName(), communityReqeust.getProfileImage()
+        ));
     }
 
 
