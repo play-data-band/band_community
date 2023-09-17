@@ -22,9 +22,22 @@ public class CommunityService {
     private final CommunityRepository communityRepository;
     private final CommunityMemberClient communityMemberClient;
 
+    @Transactional
     public void save(CommunityReqeust communityReqeust) throws Exception {
         try {
             communityRepository.save(communityReqeust.toEntity());
+
+            CommunityMemberReqeust communityMemberReqeust = CommunityMemberReqeust.builder()
+                    .memberId(communityReqeust.getOwnerId())
+                    .memberRole("모임장")
+                    .memberName(communityReqeust.getName())
+                    .communityName(communityReqeust.getDescription())
+                    .communityImage(communityReqeust.getProfileImage())
+                    .build();
+
+            System.out.println(communityMemberReqeust.getMemberId());
+
+            communityMemberClient.saveCommunityMember(communityReqeust.getOwnerId(), communityMemberReqeust);
         }catch (Exception e){
             throw new Exception("Community Save Failed");
         }

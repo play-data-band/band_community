@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class    CommunityReqeust {
+public class  CommunityReqeust {
     private Long ownerId;
     private String name;
     private String location;
