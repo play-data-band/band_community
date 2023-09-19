@@ -32,6 +32,7 @@ public class CommunityController {
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
                                @RequestParam(name = "size", required = false, defaultValue = "10") Integer size
                                ){
+
         return communityService.findAllByInterest(interest, PageRequest.of(page,size));
     }
 
@@ -43,7 +44,7 @@ public class CommunityController {
             @RequestParam(name = "size", required = false, defaultValue = "10") Integer size
 
     ){
-        System.out.println(interests.get(0));
+
         return communityService.findByAllInterest(interests,PageRequest.of(page,size));
     }
 

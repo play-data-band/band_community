@@ -25,7 +25,7 @@ public class CommunityService {
     @Transactional
     public void save(CommunityReqeust communityReqeust) throws Exception {
         try {
-            communityRepository.save(communityReqeust.toEntity());
+            Community save = communityRepository.save(communityReqeust.toEntity());
 
             CommunityMemberReqeust communityMemberReqeust = CommunityMemberReqeust.builder()
                     .memberId(communityReqeust.getOwnerId())
@@ -34,10 +34,8 @@ public class CommunityService {
                     .communityName(communityReqeust.getDescription())
                     .communityImage(communityReqeust.getProfileImage())
                     .build();
-
-            System.out.println(communityMemberReqeust.getMemberId());
-
-            communityMemberClient.saveCommunityMember(communityReqeust.getOwnerId(), communityMemberReqeust);
+            System.out.println(save.getId());
+            communityMemberClient.saveCommunityMember(save.getId(), communityMemberReqeust);
         }catch (Exception e){
             throw new Exception("Community Save Failed");
         }
